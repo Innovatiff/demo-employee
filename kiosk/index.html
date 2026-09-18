@@ -20,17 +20,12 @@
   <div class="kiosk-bg"></div>
   <main class="kiosk">
     <section class="k-left">
-      <div class="k-brand"><span class="brand-mark"><ion-icon name="people"></ion-icon></span><span class="name">Crewline</span><span class="loc" id="locBadge"><ion-icon name="location-outline"></ion-icon>Downtown</span></div>
+      <div class="k-greet" id="greet">Good morning<span>Enter your PIN to punch in or out</span></div>
       <div class="k-clock"><div class="time" id="clock">--:--<small>--</small></div><div class="date" id="date"></div></div>
-      <div class="k-onshift"><div class="h"><span class="live"></span>On shift right now <span id="onCount" style="margin-left:auto;letter-spacing:0"></span></div><div class="k-people" id="people"></div></div>
-      <div class="k-hint"><ion-icon name="finger-print-outline"></ion-icon>Enter your 4-digit PIN to clock in, take a break or clock out.</div>
     </section>
     <section class="k-right"><div class="k-card" id="card"></div></section>
   </main>
-  <div class="k-corner">
-    <button id="pinHelp"><ion-icon name="help-circle-outline"></ion-icon>Demo PINs</button>
-    <a href="../index.html"><ion-icon name="grid-outline"></ion-icon>Demo portal</a>
-  </div>
+  <button class="k-help" id="pinHelp" aria-label="Demo PINs" title="Demo PINs"><ion-icon name="help-outline"></ion-icon></button>
   <script src="../assets/js/store.js"></script>
   <script src="../assets/js/ui.js"></script>
   <script src="../assets/js/pages/kiosk.js"></script>

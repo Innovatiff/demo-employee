@@ -45,6 +45,8 @@
     stage.replaceWith(frame);
     document.title = `${head} · Crewline`;
 
+    const backBtn = $('.app-head [aria-label="Back"]');
+    if (backBtn) backBtn.addEventListener('click', (e) => { if (history.length > 1 && document.referrer && new URL(document.referrer).origin === location.origin) { e.preventDefault(); history.back(); } });
     const nb = $('#notifBtn');
     if (nb) {
       const notifs = Store.notifications(me.id);

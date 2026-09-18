@@ -40,6 +40,7 @@ body.emp-body { background: #EEF2F9; min-height: 100vh; font-size: 15px; }
 .app-head .icon-btn { width: 40px; height: 40px; border-radius: 12px; background: var(--surface-3); }
 .app-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 18px 18px calc(var(--tabbar-h) + 20px); scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
 .app-body > * + * { margin-top: 14px; }
+.app-body .demo-note { display: flex; }
 .app-body .card { border-radius: 18px; }
 .app-body .card-head { padding: 16px 16px 0; }
 .app-body .card-body { padding: 14px 16px 16px; }
@@ -131,9 +132,9 @@ body.emp-body { background: #EEF2F9; min-height: 100vh; font-size: 15px; }
 /* Pay ---------------------------------------------------------------------- */
 .pay-card { background: linear-gradient(135deg, #0F172A 0%, #1E293B 55%, #1E3A8A 100%); box-shadow: 0 18px 40px -16px rgba(15,23,42,.7); }
 .pay-card .big { font-size: 38px; }
-.pay-card .chip-row { display: flex; gap: 8px; margin-top: 14px; }
-.pay-card .kv { background: rgba(255,255,255,.1); border-radius: 12px; padding: 8px 12px; font-size: 12px; }
-.pay-card .kv b { display: block; font-size: 14px; font-family: var(--font-display); letter-spacing: -.01em; }
+.pay-card .chip-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.pay-card .kv { background: rgba(255,255,255,.1); border-radius: 12px; padding: 9px 12px; font-size: 12px; color: rgba(255,255,255,.75); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pay-card .kv b { font-size: 14.5px; font-family: var(--font-display); letter-spacing: -.01em; color: #fff; }
 .stub-list .list-item { cursor: pointer; }
 .stub-list .amount { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: -.02em; }
 

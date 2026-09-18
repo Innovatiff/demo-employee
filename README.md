@@ -7,14 +7,14 @@ It ships three apps that share one live dataset in the browser:
 |---|---|---|---|
 | **Manager console** | `/manager/` | Desktop | Dashboard, employees, weekly schedule, live time & attendance, time-off approvals, payroll runs, team chat, settings |
 | **Employee app** | `/employee/` | Mobile (shown in a phone frame on desktop) | Home, schedule, hours worked, pay & pay stubs, time-off requests, chat, profile & settings |
-| **Clock-in kiosk** | `/kiosk/` | iPad | PIN clock in / break / clock out with a live "who's on shift" board |
+| **Clock-in kiosk** | `/kiosk/` | iPad | Greeting, clock and PIN pad; one big button to punch in or out |
 
 The portal at `/` links to all three. Everything is seeded with realistic sample data for a fictional coffee company
 (*Lumen Coffee Roasters*, 14 employees, 2 locations) and is generated **relative to today**, so schedules, timesheets and payroll always look current.
 
 ## Try the live story
 
-1. Open the **kiosk** and enter a PIN (`1234` Maya · `2580` Jordan · tap **Demo PINs** for the full list). Clock in.
+1. Open the **kiosk** and enter a PIN (`1234` Maya · `2580` Jordan · the `?` in the corner lists them all). Punch in.
 2. Open the **manager console → Time & Attendance** in another tab: the clock-in appears instantly (cross-tab live sync).
 3. In the **employee app → Time off**, send a request. Approve it in **manager → Time off**; the app updates live.
 4. Send a message from either app's **Messages**: it syncs across apps and teammates reply.

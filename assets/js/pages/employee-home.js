@@ -20,7 +20,7 @@
     let hero;
     if (open) {
       const state = Store.entryState(open);
-      hero = `<div class="hero-card green" data-reveal><span class="pill live">${state === 'break' ? 'On break' : 'On shift'}</span><div class="big mt-12" id="liveHours">${hm(Store.entryHours(open))}</div><div class="row-meta"><span>${icon('log-in-outline')}Clocked in ${time(open.clockIn)}</span>${todayShift ? `<span>${icon('time-outline')}Shift ends ${UI.hmLabel(todayShift.end)}</span>` : ''}</div><div class="row-meta" style="margin-top:14px"><span style="opacity:.85">${icon('information-circle-outline')}Use the kiosk to take a break or clock out</span></div></div>`;
+      hero = `<div class="hero-card green" data-reveal><span class="pill live">${state === 'break' ? 'On break' : 'On shift'}</span><div class="big mt-12" id="liveHours">${hm(Store.entryHours(open))}</div><div class="row-meta"><span>${icon('log-in-outline')}Clocked in ${time(open.clockIn)}</span>${todayShift ? `<span>${icon('time-outline')}Shift ends ${UI.hmLabel(todayShift.end)}</span>` : ''}</div><div class="row-meta" style="margin-top:14px"><span style="opacity:.85">${icon('information-circle-outline')}Punch out at the kiosk when your shift ends</span></div></div>`;
     } else if (next) {
       const start = Store.at(next.date, next.start); const mins = Math.round((start - new Date()) / 60000);
       const inText = mins <= 0 ? 'Starting now' : mins < 60 ? `Starts in ${mins} min` : mins < 60 * 24 ? `Starts in ${Math.floor(mins / 60)}h ${mins % 60}m` : `${UI.dayLabel(next.date)}`;
