@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schedule · Crewline</title>
+  <meta name="description" content="Crewline manager console — weekly schedule">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/shell.css">
+  <link rel="stylesheet" href="../assets/css/manager.css">
+  <script type="module" src="../assets/vendor/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="../assets/vendor/ionicons/ionicons.js"></script>
+</head>
+<body data-app="manager" data-page="schedule">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app-main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page">
+        <div class="page-head" data-reveal>
+          <div><h1>Schedule</h1><p class="sub" id="pageSub">Plan shifts for the week</p></div>
+          <div class="page-actions">
+            <div class="pill-nav card" style="padding:3px;border-radius:12px"><button class="icon-btn" id="prevWeek" aria-label="Previous week"><ion-icon name="chevron-back-outline"></ion-icon></button><span class="label" id="weekLabel"></span><button class="icon-btn" id="nextWeek" aria-label="Next week"><ion-icon name="chevron-forward-outline"></ion-icon></button></div>
+            <button class="btn btn-secondary" id="btnToday">This week</button>
+            <button class="btn btn-secondary" id="btnAdd"><ion-icon name="add-outline"></ion-icon>Add shift</button>
+            <button class="btn btn-primary" id="btnPublish"><ion-icon name="paper-plane-outline"></ion-icon>Publish</button>
+          </div>
+        </div>
+
+        <section class="grid grid-4" id="kpis"></section>
+
+        <section class="card section" data-reveal>
+          <div class="card-head bordered" style="align-items:center;flex-wrap:wrap">
+            <div class="row gap-6" id="locChips"></div>
+            <div class="legend" id="legend"></div>
+          </div>
+          <div class="sched-wrap"><div class="sched" id="sched"></div></div>
+          <div class="card-foot"><span id="footNote"></span><span class="row gap-6"><ion-icon name="information-circle-outline"></ion-icon>Hover a day to add a shift · click a shift to edit</span></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/pages/manager-schedule.js"></script>
+</body>
+</html>

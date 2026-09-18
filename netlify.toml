@@ -1,0 +1,25 @@
+# Crewline · Workforce management demo
+# Static site — no build step. Drag-and-drop or connect the repo and deploy.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Pretty URLs: /manager → /manager/index.html etc. are served natively.
+# Anything else falls back to the custom 404 page.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

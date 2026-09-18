@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time Off · Crewline</title>
+  <meta name="description" content="Crewline manager console — time off requests">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/shell.css">
+  <link rel="stylesheet" href="../assets/css/manager.css">
+  <script type="module" src="../assets/vendor/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="../assets/vendor/ionicons/ionicons.js"></script>
+</head>
+<body data-app="manager" data-page="timeoff">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app-main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page">
+        <div class="page-head" data-reveal>
+          <div><h1>Time off</h1><p class="sub">Review requests and see who's away</p></div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" id="btnExport"><ion-icon name="download-outline"></ion-icon>Export</button>
+            <button class="btn btn-primary" id="btnAdd"><ion-icon name="add-outline"></ion-icon>Add time off</button>
+          </div>
+        </div>
+
+        <section class="grid grid-4" id="kpis"></section>
+
+        <section class="grid grid-side section">
+          <div class="card" data-reveal>
+            <div class="card-head bordered" style="padding-top:0;padding-bottom:0;align-items:center"><div class="tabs" id="tabs" style="border:0"></div></div>
+            <div class="list" id="reqList"></div>
+          </div>
+          <div class="card" data-reveal>
+            <div class="card-head"><div><div class="card-title">Who's away</div><div class="card-sub">Approved leave in the next 14 days</div></div></div>
+            <div class="card-body flush mt-12" id="awayList"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/pages/manager-timeoff.js"></script>
+</body>
+</html>

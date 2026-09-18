@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Crewline · Manager console shell (sidebar + topbar + page)
+   ========================================================================== */
+
+.app { display: flex; min-height: 100vh; }
+
+/* Sidebar ------------------------------------------------------------------ */
+.sidebar {
+  position: sticky; top: 0; height: 100vh; width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--surface); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; z-index: 40;
+  transition: width var(--dur) var(--ease), transform var(--dur-slow) var(--ease-out);
+}
+.brand { display: flex; align-items: center; gap: 11px; height: var(--topbar-h); padding: 0 20px; border-bottom: 1px solid transparent; }
+.brand-mark { width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0; display: grid; place-items: center; background: linear-gradient(135deg, #3B82F6, #1D4ED8); color: #fff; box-shadow: 0 6px 14px -6px rgba(37,99,235,.7), inset 0 1px 0 rgba(255,255,255,.25); }
+.brand-mark ion-icon { font-size: 19px; --ionicon-stroke-width: 44px; }
+.brand-name { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: -.03em; color: var(--text); }
+.brand-name small { display: block; font: 600 10.5px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-top: -1px; }
+
+.nav { padding: 14px 12px; display: flex; flex-direction: column; gap: 2px; flex: 1; overflow-y: auto; }
+.nav-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-4); padding: 14px 12px 6px; }
+.nav-item {
+  position: relative; display: flex; align-items: center; gap: 11px; height: 40px; padding: 0 12px;
+  border-radius: 10px; color: var(--text-2); font-weight: 500; font-size: 13.5px;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.nav-item ion-icon { font-size: 20px; color: var(--text-3); transition: color var(--dur-fast) var(--ease), transform var(--dur) var(--ease-spring); }
+.nav-item:hover { background: var(--surface-3); color: var(--text); }
+.nav-item:hover ion-icon { color: var(--text-2); transform: translateX(1px); }
+.nav-item.active { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
+.nav-item.active ion-icon { color: var(--primary); }
+.nav-item.active::before { content: ""; position: absolute; left: -12px; top: 10px; bottom: 10px; width: 3px; border-radius: 0 3px 3px 0; background: var(--primary); }
+.nav-item .count { margin-left: auto; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: var(--r-full); background: var(--red-50); color: var(--red-600); }
+.nav-item .ext { margin-left: auto; font-size: 15px; color: var(--text-4); }
+.nav-item.external:hover .ext { color: var(--text-2); }
+
+.sidebar-foot { padding: 12px; border-top: 1px solid var(--border); }
+.user-card { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; transition: background var(--dur-fast) var(--ease); cursor: pointer; }
+.user-card:hover { background: var(--surface-3); }
+.user-card .name { font-weight: 600; font-size: 13.5px; line-height: 1.2; }
+.user-card .role { font-size: 12px; color: var(--text-3); }
+.user-card ion-icon { margin-left: auto; color: var(--text-3); font-size: 16px; }
+
+/* Main --------------------------------------------------------------------- */
+.app-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 30; height: var(--topbar-h);
+  display: flex; align-items: center; gap: 12px; padding: 0 28px;
+  background: rgba(255,255,255,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar .search { width: 340px; }
+.topbar .spacer { flex: 1; }
+.topbar .date-pill { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border-radius: 10px; background: var(--surface-3); color: var(--text-2); font-weight: 500; font-size: 13px; }
+.topbar .date-pill ion-icon { font-size: 16px; color: var(--text-3); }
+.topbar .menu-toggle { display: none; }
+.topbar-user { display: flex; align-items: center; gap: 10px; padding: 4px 6px 4px 4px; border-radius: 12px; cursor: pointer; transition: background var(--dur-fast) var(--ease); }
+.topbar-user:hover { background: var(--surface-3); }
+.topbar-user .name { font-weight: 600; font-size: 13.5px; line-height: 1.2; }
+.topbar-user .role { font-size: 11.5px; color: var(--text-3); }
+.topbar-user ion-icon { font-size: 16px; color: var(--text-3); }
+
+.page { padding: 28px 28px 60px; max-width: var(--page-max); width: 100%; margin: 0 auto; animation: fade-up var(--dur-slow) var(--ease-out); }
+.page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.page-head h1 { font-size: 26px; }
+.page-head .sub { color: var(--text-2); margin-top: 4px; font-size: 14px; }
+.page-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.grid { display: grid; gap: 20px; }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-main { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+.grid-side { grid-template-columns: minmax(0, 1fr) 340px; }
+.section { margin-top: 20px; }
+
+/* Notifications panel ------------------------------------------------------ */
+.notif-panel { position: fixed; z-index: 90; width: 360px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); animation: scale-in var(--dur) var(--ease-out); transform-origin: top right; overflow: hidden; }
+.notif-panel .head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border); font-weight: 700; }
+.notif-panel .head span { font-size: 12px; color: var(--primary); font-weight: 600; cursor: pointer; }
+.notif-panel .list-item { padding: 12px 16px; align-items: flex-start; }
+.notif-panel .list-item .t { font-weight: 500; }
+.notif-panel .list-item .t b { font-weight: 600; }
+
+/* Responsive --------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-main { grid-template-columns: 1fr; }
+  .grid-side { grid-template-columns: 1fr; }
+}
+@media (max-width: 1100px) {
+  .sidebar { width: var(--sidebar-rail); }
+  .sidebar .brand { padding: 0; justify-content: center; }
+  .sidebar .brand-name, .sidebar .nav-label, .sidebar .nav-item span, .sidebar .nav-item .count, .sidebar .nav-item .ext, .sidebar .user-card > div, .sidebar .user-card > ion-icon { display: none; }
+  .sidebar .nav { padding: 12px 10px; }
+  .sidebar .nav-item { justify-content: center; padding: 0; height: 44px; }
+  .sidebar .nav-item.active::before { left: -10px; }
+  .sidebar .user-card { justify-content: center; padding: 6px; }
+  .topbar .search { width: 240px; }
+}
+@media (max-width: 820px) {
+  .sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); transform: translateX(-100%); box-shadow: none; }
+  .sidebar.open { transform: none; box-shadow: var(--shadow-xl); }
+  .sidebar.open .brand { padding: 0 20px; justify-content: flex-start; }
+  .sidebar.open .brand-name, .sidebar.open .nav-label, .sidebar.open .nav-item span, .sidebar.open .nav-item .count, .sidebar.open .nav-item .ext, .sidebar.open .user-card > div, .sidebar.open .user-card > ion-icon { display: block; }
+  .sidebar.open .nav-item { justify-content: flex-start; padding: 0 12px; height: 40px; }
+  .sidebar.open .nav-item.active::before { left: -12px; }
+  .sidebar.open .user-card { justify-content: flex-start; padding: 8px 10px; }
+  .sidebar-backdrop { position: fixed; inset: 0; z-index: 35; background: rgba(15,23,42,.35); backdrop-filter: blur(3px); animation: fade-in var(--dur); }
+  .topbar { padding: 0 16px; }
+  .topbar .menu-toggle { display: inline-flex; }
+  .topbar .search { display: none; }
+  .topbar .date-pill { display: none; }
+  .topbar-user > div { display: none; }
+  .page { padding: 20px 16px 48px; }
+  .page-head h1 { font-size: 22px; }
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}

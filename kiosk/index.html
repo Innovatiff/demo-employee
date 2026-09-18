@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Clock-in kiosk · Crewline</title>
+  <meta name="description" content="Crewline clock-in kiosk for the store iPad">
+  <meta name="theme-color" content="#0B1220">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/kiosk.css">
+  <script type="module" src="../assets/vendor/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="../assets/vendor/ionicons/ionicons.js"></script>
+</head>
+<body class="kiosk-body">
+  <div class="kiosk-bg"></div>
+  <main class="kiosk">
+    <section class="k-left">
+      <div class="k-brand"><span class="brand-mark"><ion-icon name="people"></ion-icon></span><span class="name">Crewline</span><span class="loc" id="locBadge"><ion-icon name="location-outline"></ion-icon>Downtown</span></div>
+      <div class="k-clock"><div class="time" id="clock">--:--<small>--</small></div><div class="date" id="date"></div></div>
+      <div class="k-onshift"><div class="h"><span class="live"></span>On shift right now <span id="onCount" style="margin-left:auto;letter-spacing:0"></span></div><div class="k-people" id="people"></div></div>
+      <div class="k-hint"><ion-icon name="finger-print-outline"></ion-icon>Enter your 4-digit PIN to clock in, take a break or clock out.</div>
+    </section>
+    <section class="k-right"><div class="k-card" id="card"></div></section>
+  </main>
+  <div class="k-corner">
+    <button id="pinHelp"><ion-icon name="help-circle-outline"></ion-icon>Demo PINs</button>
+    <a href="../index.html"><ion-icon name="grid-outline"></ion-icon>Demo portal</a>
+  </div>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/pages/kiosk.js"></script>
+</body>
+</html>

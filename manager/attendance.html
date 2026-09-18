@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time & Attendance · Crewline</title>
+  <meta name="description" content="Crewline manager console — time and attendance">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/shell.css">
+  <link rel="stylesheet" href="../assets/css/manager.css">
+  <script type="module" src="../assets/vendor/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="../assets/vendor/ionicons/ionicons.js"></script>
+</head>
+<body data-app="manager" data-page="attendance">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app-main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page">
+        <div class="page-head" data-reveal>
+          <div><h1>Time &amp; Attendance</h1><p class="sub" id="pageSub">Live clock-ins from the kiosk</p></div>
+          <div class="page-actions">
+            <div class="pill-nav card" style="padding:3px;border-radius:12px"><button class="icon-btn" id="prevDay" aria-label="Previous day"><ion-icon name="chevron-back-outline"></ion-icon></button><span class="label" id="dayLabel"></span><button class="icon-btn" id="nextDay" aria-label="Next day"><ion-icon name="chevron-forward-outline"></ion-icon></button></div>
+            <button class="btn btn-secondary" id="btnToday">Today</button>
+            <button class="btn btn-secondary" id="btnExport"><ion-icon name="download-outline"></ion-icon>Export timesheet</button>
+            <a class="btn btn-primary" href="../kiosk/index.html" target="_blank" rel="noopener"><ion-icon name="tablet-landscape-outline"></ion-icon>Open kiosk</a>
+          </div>
+        </div>
+
+        <section class="grid grid-4" id="kpis"></section>
+
+        <section class="card section" data-reveal>
+          <div class="card-head bordered" style="align-items:center;flex-wrap:wrap">
+            <div class="row gap-6" id="locChips"></div>
+            <div class="row gap-8"><select class="select" id="fStatus" style="width:160px;height:36px" aria-label="Filter by status"><option value="">All statuses</option><option value="on">On shift</option><option value="break">On break</option><option value="done">Completed</option><option value="late">Running late</option><option value="scheduled">Not in yet</option><option value="missed">Missed</option></select></div>
+          </div>
+          <div class="table-wrap"><table class="table" id="attTable"><thead><tr><th>Employee</th><th>Shift</th><th>Clock in</th><th>Break</th><th>Clock out</th><th class="right">Total</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+          <div class="card-foot"><span id="footNote"></span><span class="row gap-6"><span class="badge green live">Live</span> updates automatically when someone uses the kiosk</span></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/pages/manager-attendance.js"></script>
+</body>
+</html>

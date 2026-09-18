@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employees · Crewline</title>
+  <meta name="description" content="Crewline manager console — employees">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/shell.css">
+  <link rel="stylesheet" href="../assets/css/manager.css">
+  <script type="module" src="../assets/vendor/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="../assets/vendor/ionicons/ionicons.js"></script>
+</head>
+<body data-app="manager" data-page="employees">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app-main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page">
+        <div class="page-head" data-reveal>
+          <div><h1>Employees</h1><p class="sub" id="pageSub">Your whole team in one place</p></div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" id="btnExport"><ion-icon name="download-outline"></ion-icon>Export</button>
+            <button class="btn btn-primary" id="btnAdd"><ion-icon name="person-add-outline"></ion-icon>Add employee</button>
+          </div>
+        </div>
+
+        <section class="grid grid-4" id="kpis"></section>
+
+        <section class="card section" data-reveal>
+          <div class="card-head bordered" style="flex-wrap:wrap;align-items:center;gap:12px">
+            <div class="row" style="flex-wrap:wrap;gap:8px">
+              <label class="search" style="width:260px"><ion-icon name="search-outline"></ion-icon><input type="search" id="q" placeholder="Search by name, role or email…" aria-label="Search employees"></label>
+              <div class="row gap-6" id="locChips"></div>
+            </div>
+            <div class="row gap-8">
+              <select class="select" id="fPosition" style="width:160px;height:36px" aria-label="Filter by position"><option value="">All positions</option></select>
+              <select class="select" id="fStatus" style="width:140px;height:36px" aria-label="Filter by status"><option value="">All statuses</option><option value="active">Active</option><option value="leave">On leave</option><option value="inactive">Inactive</option></select>
+            </div>
+          </div>
+          <div class="table-wrap"><table class="table" id="empTable"><thead><tr><th>Employee</th><th>ID</th><th>Position</th><th>Location</th><th>Type</th><th class="right">Rate</th><th>Hired</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+          <div class="card-foot"><span id="countLabel"></span><span>Click a row to open the profile</span></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/pages/manager-employees.js"></script>
+</body>
+</html>

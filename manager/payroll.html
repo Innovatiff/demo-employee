@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payroll · Crewline</title>
+  <meta name="description" content="Crewline manager console — payroll">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/shell.css">
+  <link rel="stylesheet" href="../assets/css/manager.css">
+  <script type="module" src="../assets/vendor/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="../assets/vendor/ionicons/ionicons.js"></script>
+</head>
+<body data-app="manager" data-page="payroll">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app-main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page">
+        <div class="page-head" data-reveal>
+          <div><h1>Payroll</h1><p class="sub" id="pageSub">Bi-weekly pay periods</p></div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" id="periodBtn"><ion-icon name="calendar-outline"></ion-icon><span id="periodLabel">Period</span><ion-icon name="chevron-down-outline"></ion-icon></button>
+            <button class="btn btn-secondary" id="btnExport"><ion-icon name="download-outline"></ion-icon>Export</button>
+            <button class="btn btn-primary" id="btnRun"><ion-icon name="play-outline"></ion-icon>Run payroll</button>
+          </div>
+        </div>
+
+        <section class="grid grid-4" id="kpis"></section>
+
+        <section class="grid grid-main section">
+          <div class="card" data-reveal>
+            <div class="card-head"><div><div class="card-title">Payroll cost</div><div class="card-sub">Gross pay over the last 8 completed pay periods</div></div></div>
+            <div class="card-body"><div id="costChart"></div></div>
+          </div>
+          <div class="card" data-reveal>
+            <div class="card-head"><div><div class="card-title">By position</div><div class="card-sub" id="posSub">Share of gross pay this period</div></div></div>
+            <div class="card-body"><div id="posDonut"></div></div>
+          </div>
+        </section>
+
+        <section class="card section" data-reveal>
+          <div class="card-head bordered" style="align-items:center">
+            <div><div class="card-title" id="tableTitle">Pay run</div><div class="card-sub" id="tableSub"></div></div>
+            <label class="search" style="width:240px"><ion-icon name="search-outline"></ion-icon><input type="search" id="q" placeholder="Search employees…" aria-label="Search"></label>
+          </div>
+          <div class="table-wrap"><table class="table" id="payTable"><thead><tr><th>Employee</th><th>Position</th><th class="right">Regular</th><th class="right">Overtime</th><th class="right">Rate</th><th class="right">Gross</th><th class="right">Net</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+          <div class="card-foot"><span id="footNote"></span><span>Click a row to preview the pay stub</span></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/pages/manager-payroll.js"></script>
+</body>
+</html>

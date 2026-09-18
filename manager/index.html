@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · Crewline</title>
+  <meta name="description" content="Crewline manager console — workforce overview">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/shell.css">
+  <link rel="stylesheet" href="../assets/css/manager.css">
+  <script type="module" src="../assets/vendor/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="../assets/vendor/ionicons/ionicons.js"></script>
+</head>
+<body data-app="manager" data-page="dashboard">
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="app-main">
+      <header class="topbar" id="topbar"></header>
+      <main class="page">
+        <div class="page-head" data-reveal>
+          <div>
+            <h1>Workforce overview</h1>
+            <p class="sub" id="pageSub">Monitor your team across every location</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary" id="btnExport"><ion-icon name="download-outline"></ion-icon>Export</button>
+            <a class="btn btn-secondary" href="schedule.html"><ion-icon name="calendar-outline"></ion-icon>Schedule</a>
+            <a class="btn btn-primary" href="employees.html?new=1"><ion-icon name="person-add-outline"></ion-icon>Add employee</a>
+          </div>
+        </div>
+
+        <section class="grid grid-4" id="kpis"></section>
+
+        <section class="grid grid-main section">
+          <div class="card" data-reveal>
+            <div class="card-head">
+              <div><div class="card-title">Hours worked</div><div class="card-sub">Actual vs scheduled hours, last 7 days</div></div>
+              <div class="segmented" id="hoursRange"><button class="active" data-days="7">7 days</button><button data-days="14">14 days</button></div>
+            </div>
+            <div class="card-body"><div id="hoursChart"></div></div>
+          </div>
+          <div class="card" data-reveal>
+            <div class="card-head">
+              <div><div class="card-title">Attendance today</div><div class="card-sub" id="attendanceSub">Across all locations</div></div>
+              <a class="btn btn-ghost btn-sm" href="attendance.html">Details<ion-icon name="chevron-forward-outline"></ion-icon></a>
+            </div>
+            <div class="card-body"><div id="attendanceDonut"></div></div>
+          </div>
+        </section>
+
+        <section class="grid grid-3 section">
+          <div class="card" data-reveal>
+            <div class="card-head"><div><div class="card-title">On shift right now</div><div class="card-sub" id="onShiftSub">Live from the kiosk</div></div><span class="badge green live" id="liveBadge">Live</span></div>
+            <div class="card-body flush"><div class="list" id="onShiftList"></div></div>
+          </div>
+          <div class="card" data-reveal>
+            <div class="card-head"><div><div class="card-title">Time-off requests</div><div class="card-sub">Waiting for your review</div></div><a class="btn btn-ghost btn-sm" href="time-off.html">View all<ion-icon name="chevron-forward-outline"></ion-icon></a></div>
+            <div class="card-body flush"><div class="list" id="requestsList"></div></div>
+          </div>
+          <div class="card" data-reveal>
+            <div class="card-head"><div><div class="card-title">Recent activity</div><div class="card-sub">What's happening today</div></div></div>
+            <div class="card-body flush"><div class="list" id="activityList"></div></div>
+          </div>
+        </section>
+
+        <section class="card section" data-reveal>
+          <div class="card-head bordered">
+            <div><div class="card-title">Team</div><div class="card-sub">Hours this week and attendance over the last 4 weeks</div></div>
+            <div class="row"><label class="search" style="width:240px"><ion-icon name="search-outline"></ion-icon><input type="search" id="teamSearch" placeholder="Search team…" aria-label="Search team"></label><a class="btn btn-secondary btn-sm" href="employees.html">View all</a></div>
+          </div>
+          <div class="table-wrap"><table class="table" id="teamTable"><thead><tr><th>Employee</th><th>ID</th><th>Position</th><th>Location</th><th>Status</th><th style="min-width:160px">Hours this week</th><th>Attendance</th><th></th></tr></thead><tbody></tbody></table></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/shell.js"></script>
+  <script src="../assets/js/pages/manager-dashboard.js"></script>
+</body>
+</html>
