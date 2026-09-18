@@ -38,15 +38,20 @@ body.emp-body { background: #EEF2F9; min-height: 100vh; font-size: 15px; }
 .app-head .sub { font-size: 12.5px; color: var(--text-3); }
 .app-head .grow { min-width: 0; }
 .app-head .icon-btn { width: 40px; height: 40px; border-radius: 12px; background: var(--surface-3); }
-.app-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 24px 20px calc(var(--tabbar-h) + 28px); scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
-.app-body > * + * { margin-top: 20px; }
+.app-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 26px 20px calc(var(--tabbar-h) + 32px); scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+/* Vertical rhythm — 24px between blocks, 36px before a new section, 14px from a title to its content */
+.stack { display: flex; flex-direction: column; }
+.stack > * + * { margin-top: 24px; }
+.stack > .section-title { margin-top: 36px; }
+.stack > .section-title:first-child { margin-top: 0; }
+.stack > .section-title + * { margin-top: 14px; }
+.stack > .card + .card, .stack > .req-card + .req-card { margin-top: 14px; }
 .app-body .demo-note { display: flex; }
 .app-body .card { border-radius: 18px; }
 .app-body .card-head { padding: 20px 20px 0; }
 .app-body .card-body { padding: 18px 20px 20px; }
 .app-body .list-item { padding: 15px 20px; }
-.section-title { display: flex; align-items: center; justify-content: space-between; padding: 8px 2px 0; }
-.section-title + * { margin-top: 12px; }
+.section-title { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; }
 .section-title h2 { font-size: 15px; }
 .section-title a { font-size: 12.5px; font-weight: 600; color: var(--primary); display: inline-flex; align-items: center; gap: 2px; }
 .section-title a ion-icon { font-size: 14px; }
@@ -61,6 +66,8 @@ body.emp-body { background: #EEF2F9; min-height: 100vh; font-size: 15px; }
 .tab .badge-dot { position: absolute; top: 6px; left: calc(50% + 8px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--red-500); color: #fff; font-size: 10px; font-weight: 700; display: grid; place-items: center; border: 2px solid #fff; }
 
 /* Hero cards --------------------------------------------------------------- */
+.greeting { padding: 2px 2px 0; }
+.greeting h2 { margin-top: 4px; }
 .hero-card { position: relative; overflow: hidden; border-radius: 24px; padding: 24px; color: #fff; background: linear-gradient(135deg, #2F6BFF 0%, #1D4ED8 60%, #1E3A8A 100%); box-shadow: 0 18px 40px -16px rgba(37,99,235,.65); }
 .hero-card::before { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,.12); top: -120px; right: -80px; }
 .hero-card::after { content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,.08); bottom: -100px; left: -40px; }
