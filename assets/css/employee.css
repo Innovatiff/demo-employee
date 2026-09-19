@@ -159,7 +159,9 @@ body.emp-body { background: #EEF2F9; min-height: 100vh; font-size: 15px; }
 
 /* Chat (mobile mode) ------------------------------------------------------ */
 .chat-mobile .chat { display: block; height: 100%; min-height: 0; }
-.chat-mobile .chat-side { border: 0; height: 100%; }
+.chat-mobile .chat-side { border: 0; height: 100%; max-height: none; }
+.chat-mobile .chat-body { min-height: 0; }
+.app-emp.conv-open .app-head { display: none; }
 .chat-mobile .chat-side .head { padding: 16px 18px 8px; }
 .chat-mobile .chat-side .lists { padding: 4px 12px calc(var(--tabbar-h) + 12px); }
 .chat-mobile .conv { padding: 12px 10px; }
@@ -207,6 +209,7 @@ body.emp-body { background: #EEF2F9; min-height: 100vh; font-size: 15px; }
   .status-bar { display: none; }
   .app-head { padding-top: max(12px, env(safe-area-inset-top)); }
   .tabbar { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+  .chat-mobile .chat-compose { padding-bottom: max(22px, calc(env(safe-area-inset-bottom) + 12px)); }
   .app-emp .toasts { left: 16px; right: 16px; bottom: calc(var(--tabbar-h) + 10px); }
 }
 @media (max-width: 640px) { .overlay { padding: 12px; align-items: flex-end; } .modal { border-radius: 22px; } }
