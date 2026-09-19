@@ -12,10 +12,13 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Stylesheets and scripts are referenced with a ?v= stamp (tools/bump-assets.js),
+# so browsers must revalidate on every load. A demo that changes often must
+# never be stuck on a cached copy of an old stylesheet.
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 # Pretty URLs: /manager → /manager/index.html etc. are served natively.
 # Anything else falls back to the custom 404 page.

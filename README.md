@@ -26,8 +26,11 @@ Demo data lives in `localStorage`, resets automatically each new day, and can be
 
 The site is plain HTML/CSS/JS, so any of these work:
 
-- **Drag & drop** the repository folder onto [app.netlify.com/drop](https://app.netlify.com/drop), or
-- **Connect the repo** in Netlify — `netlify.toml` already sets the publish directory to the repo root with no build command.
+- **Connect the repo** in Netlify (recommended) — every push deploys automatically. `netlify.toml` already sets the publish directory to the repo root with no build command.
+- **Drag & drop** the repository folder onto [app.netlify.com/drop](https://app.netlify.com/drop). A dropped site is a snapshot: re-upload it after each change.
+
+Stylesheets and scripts are referenced with a `?v=` stamp so phones and browsers pick up a new deploy immediately.
+After editing anything under `assets/`, run `node tools/bump-assets.js` before deploying.
 
 ## Project structure
 
@@ -44,6 +47,7 @@ assets/js/pages/*.js       One script per page
 assets/vendor/ionicons/    Ionicons 7 (self-hosted; only the icons used are vendored)
 assets/fonts/              Inter + Plus Jakarta Sans (self-hosted, latin subset)
 tools/vendor-icons.js      Re-vendors icons after you add new <ion-icon> names
+tools/bump-assets.js       Cache-stamps CSS/JS references in the HTML (run after editing assets/)
 ```
 
 ## Development
