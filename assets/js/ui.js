@@ -47,7 +47,8 @@
     const status = opts.status ? `<i class="status ${opts.status === 'on' ? 'on' : opts.status === 'break' ? 'break' : ''}"></i>` : '';
     return `<span class="avatar ${size} ${opts.solid ? 'solid' : ''}" style="--h:${emp.hue}" title="${esc(emp.name)}">${initials(emp.name)}${status}</span>`;
   }
-  function positionBadge(pos) { if (!pos) return ''; return `<span class="badge no-dot" style="background:${pos.color}14;color:${pos.color}"><i style="width:6px;height:6px;border-radius:50%;background:${pos.color};display:inline-block"></i>${esc(pos.name)}</span>`; }
+  function shade(hex, amt) { const n = parseInt(String(hex).replace('#', ''), 16); if (Number.isNaN(n)) return hex; const f = (c) => Math.round(Math.max(0, Math.min(255, c * (1 - amt)))).toString(16).padStart(2, '0'); return `#${f(n >> 16)}${f((n >> 8) & 255)}${f(n & 255)}`; }
+  function positionBadge(pos) { if (!pos) return ''; return `<span class="badge no-dot" style="background:${pos.color}14;color:${shade(pos.color, 0.28)}"><i style="width:6px;height:6px;border-radius:50%;background:${pos.color};display:inline-block"></i>${esc(pos.name)}</span>`; }
   function statusBadge(status) {
     const map = {
       active: ['green', 'Active'], leave: ['amber', 'On leave'], inactive: ['gray', 'Inactive'],
@@ -327,5 +328,5 @@
     container.innerHTML = `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" style="overflow:visible"><path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/><circle cx="${x(values.length - 1)}" cy="${y(values[values.length - 1])}" r="3.5" fill="${color}" stroke="#fff" stroke-width="2"/></svg>`;
   }
 
-  global.UI = { $, $$, esc, el, icon, qs, clamp, money, num, hours, hm, time, hmLabel, range, dateLong, monthDay, dayName, dateRange, relative, greeting, initials, isToday, dayLabel, avatar, positionBadge, statusBadge, leaveType, leaveTypes, reveal, countUp, toast, modal, drawer, confirm, menu, closeMenus, bindSwitches, charts: { bars, donut, area, ring, sparkline } };
+  global.UI = { $, $$, esc, el, icon, qs, clamp, shade, money, num, hours, hm, time, hmLabel, range, dateLong, monthDay, dayName, dateRange, relative, greeting, initials, isToday, dayLabel, avatar, positionBadge, statusBadge, leaveType, leaveTypes, reveal, countUp, toast, modal, drawer, confirm, menu, closeMenus, bindSwitches, charts: { bars, donut, area, ring, sparkline } };
 })(window);

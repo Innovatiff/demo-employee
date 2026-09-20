@@ -22,7 +22,7 @@
         <div class="switch-row"><div><div class="t">Pay day</div><div class="d">When your pay stub is ready</div></div><span class="switch ${prefs.payday ? 'on' : ''}" data-pref="payday"></span></div>
         <div class="switch-row"><div><div class="t">Weekly summary</div><div class="d">Hours and earnings every Monday</div></div><span class="switch ${prefs.weeklySummary ? 'on' : ''}" data-pref="weeklySummary"></span></div>
       </div></div>
-      <div class="card menu-list" data-reveal><div class="list">${item('help-circle-outline', 'gray', 'Help & support', '', 'help')}<a class="list-item" href="../index.html"><span class="list-icon red">${icon('log-out-outline')}</span><div class="grow"><div class="t" style="color:var(--red-600)">Sign out</div></div></a></div></div>
+      <div class="card menu-list" data-reveal><div class="list">${item('help-circle-outline', 'gray', 'Help & support', '', 'help')}<a class="list-item" href="../index.html"><span class="list-icon red">${icon('log-out-outline')}</span><div class="grow"><div class="t" style="color:var(--red-700)">Sign out</div></div></a></div></div>
       <div class="text-xs subtle" style="text-align:center;padding:6px 0 10px" data-reveal>Crewline · Demo build · ${esc(Store.data.company.name)}</div>`;
     UI.bindSwitches($('#me'));
     $$('#me .switch').forEach((s) => s.addEventListener('toggle', (e) => { Store.data.settings.employeeApp[s.dataset.pref] = e.detail.on; Store.save(); UI.toast(e.detail.on ? 'Notifications on' : 'Notifications off', { type: 'info', duration: 1500 }); }));

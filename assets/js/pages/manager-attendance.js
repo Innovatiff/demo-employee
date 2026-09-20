@@ -13,9 +13,9 @@
     const late = all.filter((r) => r.lateMin > 0 || r.status === 'late').length;
     const missed = all.filter((r) => r.status === 'missed').length;
     const logged = all.reduce((s, r) => s + r.hours, 0);
-    const sched = all.reduce((s, r) => s + Store.shiftHours(r.shift), 0);
+    const sched = all.reduce((s, r) => s + (r.shift ? Store.shiftHours(r.shift) : 0), 0);
     const tiles = [
-      { icon: 'flash-outline', tone: 'green', label: 'On shift now', value: on, foot: `${all.length} scheduled ${state.date === today ? 'today' : 'that day'}`, live: state.date === today },
+      { icon: 'flash-outline', tone: 'green', label: 'On shift now', value: on, foot: `${all.filter((r) => r.shift).length} scheduled ${state.date === today ? 'today' : 'that day'}`, live: state.date === today },
       { icon: 'time-outline', tone: 'blue', label: 'Hours logged', value: logged, format: (v) => `${UI.num(v, 1)}h`, foot: `of ${UI.num(sched, 0)}h scheduled` },
       { icon: 'alert-circle-outline', tone: 'amber', label: 'Late arrivals', value: late, foot: late ? 'more than 8 min after start' : 'everyone on time' },
       { icon: 'close-circle-outline', tone: missed ? 'red' : 'gray', label: 'Missed shifts', value: missed, foot: missed ? 'no clock-in recorded' : 'no missed shifts' },
@@ -34,17 +34,19 @@
   }
 
   function table() {
-    const list = rows().sort((a, b) => a.shift.start.localeCompare(b.shift.start) || a.employee.name.localeCompare(b.employee.name));
+    const startOf = (r) => (r.shift ? r.shift.start : '99:99');
+    const rowId = (r) => (r.shift ? r.shift.id : 'u:' + r.employee.id);
+    const list = rows().sort((a, b) => startOf(a).localeCompare(startOf(b)) || a.employee.name.localeCompare(b.employee.name));
     const order = { on: 0, break: 0, late: 1, scheduled: 2, done: 3, missed: 4 };
-    list.sort((a, b) => order[a.status] - order[b.status] || a.shift.start.localeCompare(b.shift.start));
+    list.sort((a, b) => order[a.status] - order[b.status] || startOf(a).localeCompare(startOf(b)));
     $('#attTable tbody').innerHTML = list.map((r) => {
       const e = r.entry; const pos = Store.position(r.employee.positionId);
       const brk = e && e.breakStart ? (e.breakEnd ? hm((new Date(e.breakEnd) - new Date(e.breakStart)) / 3600000) : `<span class="badge amber">On break</span>`) : '<span class="subtle">—</span>';
       const inCell = r.firstIn ? `<span class="num">${time(r.firstIn)}</span>${r.lateMin ? `<span class="late-tag">${icon('time-outline')}+${r.lateMin}m</span>` : ''}` : (r.status === 'missed' ? '<span class="subtle">No clock-in</span>' : '<span class="subtle">—</span>');
       const outCell = r.status === 'on' || r.status === 'break' ? `<span class="live-cell"><i></i>In progress</span>` : r.lastOut ? `<span class="num">${time(r.lastOut)}</span>` : '<span class="subtle">—</span>';
-      return `<tr data-id="${r.shift.id}"><td><div class="person">${avatar(r.employee, 'md', { status: r.status === 'on' ? 'on' : r.status === 'break' ? 'break' : null })}<div><div class="name">${esc(r.employee.name)}</div><div class="meta">${esc(pos.name)} · ${esc(Store.location(r.employee.locationId).name)}</div></div></div></td><td><div class="strong num">${range(r.shift.start, r.shift.end)}</div><div class="text-sm subtle">${esc(r.shift.label)} · ${esc(Store.location(r.shift.locationId).name)}</div></td><td>${inCell}</td><td>${brk}</td><td>${outCell}</td><td class="right num strong">${r.hours ? hm(r.hours) : '<span class="subtle">—</span>'}</td><td>${statusBadge(r.status)}</td><td class="right"><button class="icon-btn sm" data-menu aria-label="Actions">${icon('ellipsis-horizontal')}</button></td></tr>`;
+      return `<tr data-id="${rowId(r)}"><td><div class="person">${avatar(r.employee, 'md', { status: r.status === 'on' ? 'on' : r.status === 'break' ? 'break' : null })}<div><div class="name">${esc(r.employee.name)}</div><div class="meta">${esc(pos.name)} · ${esc(Store.location(r.employee.locationId).name)}</div></div></div></td><td>${r.shift ? `<div class="strong num">${range(r.shift.start, r.shift.end)}</div><div class="text-sm subtle">${esc(r.shift.label)} · ${esc(Store.location(r.shift.locationId).name)}</div>` : `<span class="badge gray no-dot">${icon('flash-outline')}Unscheduled</span><div class="text-sm subtle mt-4">Punched in without a shift</div>`}</td><td>${inCell}</td><td>${brk}</td><td>${outCell}</td><td class="right num strong">${r.hours ? hm(r.hours) : '<span class="subtle">—</span>'}</td><td>${statusBadge(r.status)}</td><td class="right"><button class="icon-btn sm" data-menu aria-label="Actions">${icon('ellipsis-horizontal')}</button></td></tr>`;
     }).join('') || `<tr><td colspan="8"><div class="empty">${icon('calendar-outline')}<div class="t">No shifts ${state.status ? 'with that status' : 'scheduled'}</div></div></td></tr>`;
-    $$('#attTable [data-menu]').forEach((b) => b.addEventListener('click', (ev) => { ev.stopPropagation(); const r = list.find((x) => x.shift.id === b.closest('tr').dataset.id); rowMenu(b, r); }));
+    $$('#attTable [data-menu]').forEach((b) => b.addEventListener('click', (ev) => { ev.stopPropagation(); const r = list.find((x) => rowId(x) === b.closest('tr').dataset.id); rowMenu(b, r); }));
     const total = list.reduce((s, r) => s + r.hours, 0);
     $('#footNote').textContent = `${list.length} shifts · ${UI.num(total, 1)} hours logged`;
   }
@@ -62,10 +64,10 @@
   function adjustModal(r) {
     const e = r.entry;
     const toLocal = (iso) => iso ? Store.toHM(new Date(iso)) : '';
-    const m = UI.modal({ title: 'Adjust time entry', sub: `${r.employee.name} · ${UI.dateLong(r.shift.date)}`, body: `<form class="form-grid" id="adjForm"><div class="field"><label>Clock in</label><input class="input" type="time" name="in" value="${toLocal(e.clockIn)}" required></div><div class="field"><label>Clock out</label><input class="input" type="time" name="out" value="${toLocal(e.clockOut)}"></div><div class="field"><label>Break start</label><input class="input" type="time" name="bs" value="${toLocal(e.breakStart)}"></div><div class="field"><label>Break end</label><input class="input" type="time" name="be" value="${toLocal(e.breakEnd)}"></div><div class="field span-2"><label>Reason</label><input class="input" name="reason" placeholder="e.g. Forgot to clock out"></div></form>`, footer: `<button class="btn btn-secondary" data-close>Cancel</button><button class="btn btn-primary" id="saveAdj">${icon('checkmark-outline')}Save</button>` });
+    const m = UI.modal({ title: 'Adjust time entry', sub: `${r.employee.name} · ${UI.dateLong(r.entry.date)}`, body: `<form class="form-grid" id="adjForm"><div class="field"><label>Clock in</label><input class="input" type="time" name="in" value="${toLocal(e.clockIn)}" required></div><div class="field"><label>Clock out</label><input class="input" type="time" name="out" value="${toLocal(e.clockOut)}"></div><div class="field"><label>Break start</label><input class="input" type="time" name="bs" value="${toLocal(e.breakStart)}"></div><div class="field"><label>Break end</label><input class="input" type="time" name="be" value="${toLocal(e.breakEnd)}"></div><div class="field span-2"><label>Reason</label><input class="input" name="reason" placeholder="e.g. Forgot to clock out"></div></form>`, footer: `<button class="btn btn-secondary" data-close>Cancel</button><button class="btn btn-primary" id="saveAdj">${icon('checkmark-outline')}Save</button>` });
     $('#saveAdj', m.el).addEventListener('click', () => {
       const f = $('#adjForm', m.el); if (!f.reportValidity()) return;
-      const set = (hmv) => hmv ? Store.at(r.shift.date, hmv).toISOString() : null;
+      const set = (hmv) => hmv ? Store.at(r.entry.date, hmv).toISOString() : null;
       e.clockIn = set(f.in.value); e.clockOut = set(f.out.value); e.breakStart = set(f.bs.value); e.breakEnd = set(f.be.value);
       Store.save(); m.close(); UI.toast('Time entry updated'); render();
     });

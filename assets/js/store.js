@@ -567,7 +567,7 @@
     /* ---- attendance helpers ---- */
     attendanceOn(date, current = now()) {
       const shifts = api.shiftsOn(date);
-      return shifts.map((s) => {
+      const rows = shifts.map((s) => {
         const emp = api.employee(s.employeeId);
         const dayEntries = data.timeEntries.filter((x) => x.employeeId === s.employeeId && x.date === date);
         const shiftEntry = dayEntries.find((x) => x.shiftId === s.id) || null;
@@ -586,6 +586,18 @@
         const lastOut = dayEntries.filter((x) => x.clockOut).map((x) => x.clockOut).sort().pop() || null;
         return { shift: s, employee: emp, entry: e, firstIn: first ? first.clockIn : null, lastOut, status, lateMin: lateMin >= 8 ? lateMin : 0, hours };
       }).filter((r) => r.employee);
+      // punch-ins from people with no shift that day (kiosk use on a day off) still show up
+      const scheduled = new Set(shifts.map((s) => s.employeeId)); const seen = new Set();
+      data.timeEntries.filter((x) => x.date === date && x.clockIn && !scheduled.has(x.employeeId)).forEach((x) => {
+        if (seen.has(x.employeeId)) return; seen.add(x.employeeId);
+        const emp = api.employee(x.employeeId); if (!emp) return;
+        const dayEntries = data.timeEntries.filter((y) => y.employeeId === x.employeeId && y.date === date && y.clockIn).sort((a, b) => a.clockIn.localeCompare(b.clockIn));
+        const open = dayEntries.find((y) => !y.clockOut) || null;
+        const lastOut = dayEntries.filter((y) => y.clockOut).map((y) => y.clockOut).sort().pop() || null;
+        const hours = dayEntries.reduce((sum, y) => sum + api.entryHours(y, current), 0);
+        rows.push({ shift: null, unscheduled: true, employee: emp, entry: open || dayEntries[dayEntries.length - 1], firstIn: dayEntries[0].clockIn, lastOut, status: open ? (open.breakStart && !open.breakEnd ? 'break' : 'on') : 'done', lateMin: 0, hours });
+      });
+      return rows;
     },
   };
 

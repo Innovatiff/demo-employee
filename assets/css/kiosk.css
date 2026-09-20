@@ -2,7 +2,7 @@
    Crewline · Clock-in kiosk (iPad, dark) — greeting, time, PIN pad. That's it.
    ========================================================================== */
 :root {
-  --k-bg: #0B1220; --k-panel: rgba(255,255,255,.055); --k-border: rgba(255,255,255,.1); --k-text: #F8FAFC; --k-text-2: rgba(248,250,252,.72); --k-text-3: rgba(248,250,252,.45);
+  --k-bg: #0B1220; --k-panel: rgba(255,255,255,.055); --k-border: rgba(255,255,255,.1); --k-text: #F8FAFC; --k-text-2: rgba(248,250,252,.82); --k-text-3: rgba(248,250,252,.62);
 }
 html, body { height: 100%; }
 body.kiosk-body { background: var(--k-bg); color: var(--k-text); overflow: hidden; -webkit-user-select: none; user-select: none; }
@@ -49,8 +49,8 @@ body.kiosk-body { background: var(--k-bg); color: var(--k-text); overflow: hidde
 .k-punch ion-icon { font-size: 32px; --ionicon-stroke-width: 44px; }
 .k-punch:hover { filter: brightness(1.06); }
 .k-punch:active { transform: scale(.97); }
-.k-punch.in { background: linear-gradient(135deg, #34D399, #059669); box-shadow: 0 22px 44px -16px rgba(16,185,129,.85), inset 0 1px 0 rgba(255,255,255,.25); }
-.k-punch.out { background: linear-gradient(135deg, #60A5FA, #2563EB 55%, #4F46E5); box-shadow: 0 22px 44px -16px rgba(37,99,235,.85), inset 0 1px 0 rgba(255,255,255,.25); }
+.k-punch.in { background: linear-gradient(135deg, #10B981 0%, #059669 45%, #047857 100%); box-shadow: 0 22px 44px -16px rgba(16,185,129,.85), inset 0 1px 0 rgba(255,255,255,.25); }
+.k-punch.out { background: linear-gradient(135deg, #3B82F6 0%, #2563EB 45%, #4338CA 100%); box-shadow: 0 22px 44px -16px rgba(37,99,235,.85), inset 0 1px 0 rgba(255,255,255,.25); }
 .k-bar { width: 120px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.12); margin: 26px auto 0; overflow: hidden; }
 .k-bar span { display: block; height: 100%; background: rgba(255,255,255,.7); width: 100%; transform-origin: left; animation: bar-shrink var(--bar-dur, 5s) linear forwards; }
 @keyframes bar-shrink { from { transform: scaleX(1); } to { transform: scaleX(0); } }

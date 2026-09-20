@@ -28,9 +28,9 @@
   --primary-ring:   rgba(37, 99, 235, .22);
 
   /* Semantic / status (never reused as series colors) */
-  --green-600: #059669; --green-500: #10B981; --green-100: #D1FAE5; --green-50: #ECFDF5;
-  --amber-600: #D97706; --amber-500: #F59E0B; --amber-100: #FEF3C7; --amber-50: #FFFBEB;
-  --red-600:   #DC2626; --red-500:   #EF4444; --red-100:   #FEE2E2; --red-50:   #FEF2F2;
+  --green-700: #047857; --green-600: #059669; --green-500: #10B981; --green-100: #D1FAE5; --green-50: #ECFDF5;
+  --amber-700: #B45309; --amber-600: #D97706; --amber-500: #F59E0B; --amber-100: #FEF3C7; --amber-50: #FFFBEB;
+  --red-700:   #B91C1C; --red-600:   #DC2626; --red-500:   #EF4444; --red-100:   #FEE2E2; --red-50:   #FEF2F2;
 
   /* Categorical (validated on white): blue, orange, green, violet, pink */
   --cat-1: #2563EB;
@@ -39,8 +39,8 @@
   --cat-4: #7C3AED;
   --cat-5: #DB2777;
   --violet-600: #7C3AED; --violet-50: #F5F3FF; --violet-100: #EDE9FE;
-  --orange-600: #EA580C; --orange-50: #FFF7ED; --orange-100: #FFEDD5;
-  --pink-600:   #DB2777; --pink-50:   #FDF2F8;
+  --orange-700: #C2410C; --orange-600: #EA580C; --orange-50: #FFF7ED; --orange-100: #FFEDD5;
+  --pink-700:   #BE185D; --pink-600:   #DB2777; --pink-50:   #FDF2F8;
   --teal-600:   #0D9488; --teal-50:   #F0FDFA;
 
   /* Surfaces & ink */
@@ -53,8 +53,8 @@
   --border-2:   #D6DCE8;
   --text:       #0F172A;
   --text-2:     #475569;
-  --text-3:     #8A97AD;
-  --text-4:     #B4BDCC;
+  --text-3:     #5F6E85;   /* 5.2:1 on white, 4.8:1 on --bg */
+  --text-4:     #8A97AD;   /* placeholders, chevrons, decorative only */
   --ink-inverse: #FFFFFF;
 
   /* Radii */

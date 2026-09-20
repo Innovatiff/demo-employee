@@ -61,7 +61,7 @@
       { label: 'Not in yet', value: upcoming + late, color: '#CBD5E1', icon: 'hourglass-outline' },
       { label: 'Missed', value: missed, color: '#EF4444', icon: 'close-circle-outline' },
     ].filter((s) => s.value > 0);
-    $('#attendanceSub').textContent = `${rows.length} shifts scheduled · ${late ? late + ' running late' : 'nobody late'}`;
+    $('#attendanceSub').textContent = `${rows.filter((r) => r.shift).length} shifts scheduled · ${late ? late + ' running late' : 'nobody late'}`;
     if (!rows.length) { $('#attendanceDonut').innerHTML = `<div class="empty">${icon('calendar-outline')}<div class="t">No shifts today</div></div>`; return; }
     UI.charts.donut($('#attendanceDonut'), { segments, centerValue: `${rate}%`, centerLabel: 'attendance' });
   }
@@ -81,7 +81,7 @@
     const list = Store.timeOff({ status: 'pending' });
     const host = $('#requestsList');
     if (!list.length) { host.innerHTML = `<div class="empty">${icon('checkmark-done-outline')}<div class="t">All caught up</div><div>No pending requests.</div></div>`; return; }
-    host.innerHTML = list.slice(0, 4).map((t) => { const emp = Store.employee(t.employeeId); const lt = leaveType(t.type); return `<div class="list-item" data-id="${t.id}">${avatar(emp, 'md')}<div class="grow"><div class="t">${esc(emp.name)}</div><div class="d">${icon(lt.icon)} ${esc(lt.label)} · ${UI.dateRange(t.from, t.to)} · ${t.days}d</div></div><div class="row gap-4"><button class="icon-btn sm bordered" data-act="declined" title="Decline" style="color:var(--red-600)">${icon('close-outline')}</button><button class="icon-btn sm bordered" data-act="approved" title="Approve" style="color:var(--green-600)">${icon('checkmark-outline')}</button></div></div>`; }).join('');
+    host.innerHTML = list.slice(0, 4).map((t) => { const emp = Store.employee(t.employeeId); const lt = leaveType(t.type); return `<div class="list-item" data-id="${t.id}">${avatar(emp, 'md')}<div class="grow"><div class="t">${esc(emp.name)}</div><div class="d">${icon(lt.icon)} ${esc(lt.label)} · ${UI.dateRange(t.from, t.to)} · ${t.days}d</div></div><div class="row gap-4"><button class="icon-btn sm bordered" data-act="declined" title="Decline" style="color:var(--red-700)">${icon('close-outline')}</button><button class="icon-btn sm bordered" data-act="approved" title="Approve" style="color:var(--green-700)">${icon('checkmark-outline')}</button></div></div>`; }).join('');
     host.querySelectorAll('[data-act]').forEach((b) => b.addEventListener('click', () => { const id = b.closest('[data-id]').dataset.id; const t = Store.setTimeOffStatus(id, b.dataset.act); UI.toast(`${b.dataset.act === 'approved' ? 'Approved' : 'Declined'} ${Store.employee(t.employeeId).first}'s request`, { type: b.dataset.act === 'approved' ? 'success' : 'info' }); }));
   }
 

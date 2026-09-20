@@ -55,7 +55,7 @@
   function table() {
     const s = summary(); const p = period();
     const rows = s.rows.filter((r) => !state.q || r.employee.name.toLowerCase().includes(state.q)).sort((a, b) => b.gross - a.gross);
-    $('#payTable tbody').innerHTML = rows.map((r) => `<tr class="clickable" data-id="${r.employee.id}"><td><div class="person">${avatar(r.employee, 'md')}<div><div class="name">${esc(r.employee.name)}</div><div class="meta">${r.employee.id} · ${esc(r.employee.type)}</div></div></div></td><td>${positionBadge(Store.position(r.employee.positionId))}</td><td class="right num">${num(r.regular, 1)}h</td><td class="right num">${r.overtime ? `<span style="color:var(--amber-600);font-weight:600">${num(r.overtime, 1)}h</span>` : '<span class="subtle">—</span>'}</td><td class="right num">${money(r.rate)}</td><td class="right num strong">${money(r.gross)}</td><td class="right num">${money(r.net)}</td><td>${statusBadge(p.status === 'paid' ? 'paid' : 'open')}</td><td class="right"><button class="icon-btn sm" aria-label="Pay stub">${icon('receipt-outline')}</button></td></tr>`).join('') || `<tr><td colspan="9"><div class="empty">${icon('search-outline')}<div class="t">No matches</div></div></td></tr>`;
+    $('#payTable tbody').innerHTML = rows.map((r) => `<tr class="clickable" data-id="${r.employee.id}"><td><div class="person">${avatar(r.employee, 'md')}<div><div class="name">${esc(r.employee.name)}</div><div class="meta">${r.employee.id} · ${esc(r.employee.type)}</div></div></div></td><td>${positionBadge(Store.position(r.employee.positionId))}</td><td class="right num">${num(r.regular, 1)}h</td><td class="right num">${r.overtime ? `<span style="color:var(--amber-700);font-weight:600">${num(r.overtime, 1)}h</span>` : '<span class="subtle">—</span>'}</td><td class="right num">${money(r.rate)}</td><td class="right num strong">${money(r.gross)}</td><td class="right num">${money(r.net)}</td><td>${statusBadge(p.status === 'paid' ? 'paid' : 'open')}</td><td class="right"><button class="icon-btn sm" aria-label="Pay stub">${icon('receipt-outline')}</button></td></tr>`).join('') || `<tr><td colspan="9"><div class="empty">${icon('search-outline')}<div class="t">No matches</div></div></td></tr>`;
     $$('#payTable tr[data-id]').forEach((tr) => tr.addEventListener('click', () => stub(tr.dataset.id)));
     $('#footNote').textContent = `${rows.length} employees · ${money(rows.reduce((a, r) => a + r.gross, 0))} gross`;
   }
@@ -72,7 +72,7 @@
       <div class="stub-row"><span>Federal income tax</span><span class="num">−${money(r.gross * 0.12)}</span></div>
       <div class="stub-row"><span>Social security &amp; Medicare</span><span class="num">−${money(r.gross * 0.0765)}</span></div>
       <div class="stub-row"><span>State tax</span><span class="num">−${money(r.gross * 0.0155)}</span></div>
-      <div class="stub-row total"><span>Net pay</span><span class="num" style="color:var(--green-600)">${money(r.net)}</span></div>`;
+      <div class="stub-row total"><span>Net pay</span><span class="num" style="color:var(--green-700)">${money(r.net)}</span></div>`;
     UI.modal({ title: 'Pay stub', body, footer: `<button class="btn btn-secondary" data-close>Close</button><button class="btn btn-primary" id="dl">${icon('download-outline')}Download PDF</button>` });
     $('#dl').addEventListener('click', () => UI.toast(`Pay stub for ${e.first} downloaded`, { icon: 'download-outline' }));
   }

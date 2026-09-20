@@ -30,7 +30,7 @@
     }
 
     $('#home').innerHTML = `
-      <div data-reveal class="greeting"><div class="text-sm subtle">${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</div><h2 style="font-size:25px;margin-top:4px">${UI.greeting()}, ${esc(me.first)} 👋</h2></div>
+      <div data-reveal class="greeting"><div class="date">${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</div><h2 style="font-size:25px;margin-top:4px">${UI.greeting()}, ${esc(me.first)} 👋</h2></div>
       ${hero}
       <div class="quick" data-reveal>
         <a href="time-off.html"><span class="list-icon amber">${icon('airplane-outline')}</span>Time off</a>

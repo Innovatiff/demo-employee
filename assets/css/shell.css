@@ -18,7 +18,7 @@
 .brand-name small { display: block; font: 600 10.5px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-top: -1px; }
 
 .nav { padding: 14px 12px; display: flex; flex-direction: column; gap: 2px; flex: 1; overflow-y: auto; }
-.nav-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-4); padding: 14px 12px 6px; }
+.nav-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--text-3); padding: 14px 12px 6px; }
 .nav-item {
   position: relative; display: flex; align-items: center; gap: 11px; height: 40px; padding: 0 12px;
   border-radius: 10px; color: var(--text-2); font-weight: 500; font-size: 13.5px;
@@ -30,7 +30,7 @@
 .nav-item.active { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
 .nav-item.active ion-icon { color: var(--primary); }
 .nav-item.active::before { content: ""; position: absolute; left: -12px; top: 10px; bottom: 10px; width: 3px; border-radius: 0 3px 3px 0; background: var(--primary); }
-.nav-item .count { margin-left: auto; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: var(--r-full); background: var(--red-50); color: var(--red-600); }
+.nav-item .count { margin-left: auto; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: var(--r-full); background: var(--red-50); color: var(--red-700); }
 .nav-item .ext { margin-left: auto; font-size: 15px; color: var(--text-4); }
 .nav-item.external:hover .ext { color: var(--text-2); }
 

@@ -33,7 +33,7 @@
       <div class="stub-row"><span>Federal income tax</span><span class="num">−${money(r.gross * 0.12)}</span></div>
       <div class="stub-row"><span>Social security &amp; Medicare</span><span class="num">−${money(r.gross * 0.0765)}</span></div>
       <div class="stub-row"><span>State tax</span><span class="num">−${money(r.gross * 0.0155)}</span></div>
-      <div class="stub-row total"><span>Net pay</span><span class="num" style="color:var(--green-600)">${money(r.net)}</span></div>`, footer: `<button class="btn btn-primary btn-lg btn-block" id="dlStub">${icon('download-outline')}Download PDF</button>` });
+      <div class="stub-row total"><span>Net pay</span><span class="num" style="color:var(--green-700)">${money(r.net)}</span></div>`, footer: `<button class="btn btn-primary btn-lg btn-block" id="dlStub">${icon('download-outline')}Download PDF</button>` });
     $('#dlStub').addEventListener('click', () => UI.toast('Pay stub downloaded', { icon: 'download-outline' }));
   }
   document.addEventListener('DOMContentLoaded', () => { render(); Store.onChange(() => render()); });

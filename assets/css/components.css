@@ -25,11 +25,11 @@
 .btn-soft:hover { background: var(--primary-soft-2); }
 .btn-danger { background: var(--red-600); color: #fff; }
 .btn-danger:hover { background: #B91C1C; }
-.btn-danger-soft { background: var(--red-50); color: var(--red-600); }
+.btn-danger-soft { background: var(--red-50); color: var(--red-700); }
 .btn-danger-soft:hover { background: var(--red-100); }
 .btn-success { background: var(--green-600); color: #fff; }
 .btn-success:hover { background: #047857; }
-.btn-success-soft { background: var(--green-50); color: var(--green-600); }
+.btn-success-soft { background: var(--green-50); color: var(--green-700); }
 .btn-success-soft:hover { background: var(--green-100); }
 
 .btn-sm { height: 32px; padding: 0 11px; font-size: 12.5px; border-radius: 8px; }
@@ -87,8 +87,8 @@
 .stat-foot { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-3); }
 .delta { display: inline-flex; align-items: center; gap: 2px; font-weight: 600; font-size: 12.5px; padding: 2px 7px 2px 5px; border-radius: var(--r-full); }
 .delta ion-icon { font-size: 14px; }
-.delta.up { color: var(--green-600); background: var(--green-50); }
-.delta.down { color: var(--red-600); background: var(--red-50); }
+.delta.up { color: var(--green-700); background: var(--green-50); }
+.delta.down { color: var(--red-700); background: var(--red-50); }
 .delta.flat { color: var(--text-2); background: var(--surface-3); }
 
 /* Badges & chips ----------------------------------------------------------- */
@@ -99,13 +99,13 @@
 .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .badge.no-dot::before { display: none; }
 .badge ion-icon { font-size: 14px; }
-.badge.green { background: var(--green-50); color: var(--green-600); }
-.badge.amber { background: var(--amber-50); color: var(--amber-600); }
-.badge.red { background: var(--red-50); color: var(--red-600); }
+.badge.green { background: var(--green-50); color: var(--green-700); }
+.badge.amber { background: var(--amber-50); color: var(--amber-700); }
+.badge.red { background: var(--red-50); color: var(--red-700); }
 .badge.blue { background: var(--blue-50); color: var(--blue-700); }
 .badge.violet { background: var(--violet-50); color: var(--violet-600); }
-.badge.orange { background: var(--orange-50); color: var(--orange-600); }
-.badge.pink { background: var(--pink-50); color: var(--pink-600); }
+.badge.orange { background: var(--orange-50); color: var(--orange-700); }
+.badge.pink { background: var(--pink-50); color: var(--pink-700); }
 .badge.gray { background: var(--surface-3); color: var(--text-2); }
 .badge.live::before { animation: pulse-dot 1.8s infinite; }
 
@@ -127,7 +127,7 @@
   width: var(--size); height: var(--size); border-radius: 50%; flex-shrink: 0;
   display: inline-grid; place-items: center;
   font-weight: 700; font-size: calc(var(--size) * .36); letter-spacing: .01em;
-  background: hsl(var(--h, 220) 90% 93%); color: hsl(var(--h, 220) 60% 36%);
+  background: hsl(var(--h, 220) 90% 93%); color: hsl(var(--h, 220) 62% 27%);
   position: relative; user-select: none;
 }
 .avatar.solid { background: linear-gradient(135deg, hsl(var(--h) 80% 60%), hsl(calc(var(--h) + 28) 76% 48%)); color: #fff; box-shadow: inset 0 -2px 6px rgba(0,0,0,.12); }
